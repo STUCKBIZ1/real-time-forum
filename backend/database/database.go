@@ -2,33 +2,30 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"os"
-
 	"real-time-forum/backend/config"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var DB *sql.DB
 
-func InitDb() error {
+func InitDb() (*sql.DB, error) {
 	var err error
 	DB, err = sql.Open(config.DB.Driver, config.DB.DSN)
 	if err != nil {
-		return err
+		return nil, err
 	}
-
-	schema, err := os.ReadFile("database/schema.sql")
-	if err != nil {
-		return err
-	}
-	_, err = DB.Exec(string(schema))
+	schema, err := os.ReadFile("backend/database/schema.sql")
 	if err != nil {
 		DB.Close()
-		return err
+		return nil, err
 	}
+	_, err = DB.Exec(string(schema))
+
 	if err != nil {
-		fmt.Println(err)
-		return err
+		DB.Close()
+		return nil, err
 	}
-	return err
+	return DB, nil
 }
