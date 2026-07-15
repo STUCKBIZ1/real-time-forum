@@ -1,9 +1,37 @@
 .sidebar{
 
+
     display:flex;
 
     flex-direction:column;
 
-    gap:16px;
+    gap:15px;
+
+
+}
+
+
+
+.sidebar-item{
+
+
+    padding:12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+
+}
+
+
+
+.sidebar-item:hover{
+
+
+    background:var(--hover);
+
 
 }

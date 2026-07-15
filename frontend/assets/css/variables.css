@@ -1,21 +1,29 @@
-:root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
+:root{
 
-    --background: #f3f4f6;
-    --surface: #ffffff;
-    --text: #111827;
-    --text-light: #6b7280;
-    --border: #d1d5db;
-    --danger: #dc2626;
-    --success: #16a34a;
+
+    --background:#f5f6f8;
+
+
+    --surface:#ffffff;
+
+
+    --primary:#2563eb;
+
+
+    --text:#111827;
+
+
+    --text-secondary:#6b7280;
+
+
+    --border:#e5e7eb;
+
+
+    --hover:#f3f4f6;
+
+
     --shadow:
-        0 10px 30px rgba(0,0,0,0.1);
+    0 4px 12px rgba(0,0,0,.08);
 
-    --radius: 12px;
-
-    --transition:
-        .25s ease;
-    --auth-width: 430px;
 
 }

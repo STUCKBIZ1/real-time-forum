@@ -15,8 +15,12 @@ func main() {
 		log.Fatal(err)
 	}
 	router.SetupRouter(db)
+	fs := http.FileServer(
+		http.Dir("./frontend"),
+	)
+	http.Handle("/", fs)
 	addr := config.Server.Host + ":" + config.Server.Port
-	fmt.Println(addr)
+	fmt.Println("http://"+addr)
 	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		log.Fatal(err)

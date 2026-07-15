@@ -1,8 +1,11 @@
 package auth
 
-import "net/http"
+import (
+	"net/http"
+	"real-time-forum/backend/middleware"
+)
 
 func RegisterRoutes(handler *Handler){
-	http.HandleFunc("/register", handler.Register)
-
+	http.HandleFunc("/register", middleware.Methode("POST", handler.Register))
+	http.HandleFunc("/login", middleware.Methode("POST", middleware.GestOnly(handler.Login)))
 }

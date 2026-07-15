@@ -1,14 +1,41 @@
 .post{
 
+
+    background:var(--surface);
+
+    border-radius:14px;
+
+    padding:20px;
+
+
     display:flex;
 
     flex-direction:column;
 
-    gap:18px;
+    gap:15px;
+
+
+    cursor:pointer;
+
+    transition:.2s;
+
 
 }
 
+
+
+.post:hover{
+
+
+    transform:translateY(-2px);
+
+
+}
+
+
+
 .post-header{
+
 
     display:flex;
 
@@ -16,12 +43,45 @@
 
     gap:12px;
 
+
 }
+
+
+
+.post-title{
+
+
+    font-size:22px;
+
+    font-weight:700;
+
+
+}
+
+
+
+.post-content{
+
+
+    line-height:1.6;
+
+    color:var(--text-secondary);
+
+
+}
+
+
 
 .post-footer{
 
+
     display:flex;
 
-    gap:12px;
+    gap:10px;
+
+    border-top:1px solid var(--border);
+
+    padding-top:15px;
+
 
 }

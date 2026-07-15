@@ -1,9 +1,9 @@
 import { showLogin, showRegister } from "./page.js";
 import { registerAPI, loginAPI } from "./api.js";
 import { getLoginData, getRegisterData } from "../../shared/helpers.js";
-
-function handleAuthNavigation(){
+import { showHome } from "../home/page.js";
     const app = document.getElementById("app");
+function handleAuthNavigation(){
     const loginLink = document.getElementById("login-link");
     if(loginLink){
         loginLink.addEventListener("click", ()=>{
@@ -33,7 +33,6 @@ async function handleRegisterSubmit(e){
     }
 }
 async function handleLoginSubmit(e){
-
     e.preventDefault();
     const data = getLoginData();
     try{
@@ -53,7 +52,7 @@ function handleForms(){
             "submit",
             handleRegisterSubmit
         );
-
+        
     }
     const loginForm =
     document.getElementById("login-form");
