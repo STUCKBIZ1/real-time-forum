@@ -19,6 +19,10 @@ func (s *Service) Register(data RegisterReq) error {
 	var err error
 	data.Email = strings.ToLower(data.Email)
 	data.Nickname = strings.ToLower(data.Nickname)
+	exist, _ := s.repo.UserExists(data.Email, data.Nickname);
+	if exist {
+		return errors.New("User aleardy exist")
+	}
 	if !utils.IsValidEmail(data.Email) {
 		return errors.New("Invalid Email")
 	}

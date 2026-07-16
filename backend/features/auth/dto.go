@@ -10,7 +10,7 @@ type RegisterReq struct{
 	Nickname string `json:"nickname"`
 	Email string `json:"email"`
 	Password string `json:"password"`
-	Age string `json:"age"`
+	Age int `json:"age"`
 	Gender string `json:"gender"`
 	Avatar string `json:"avatar"`
 }

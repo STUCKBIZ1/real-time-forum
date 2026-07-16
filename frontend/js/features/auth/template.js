@@ -100,7 +100,8 @@ export function registerTemplate(){
                         </option>
                     </select>
                 </div>
-                <div id="register-message"></div>
+                <div id="register-success" class="auth-success"></div>
+                <div id="register-error" class="auth-error"></div>
                 <button
                 class="auth-btn"
                 type="submit">
@@ -156,7 +157,8 @@ export function loginTemplate(){
                         </span>
                     </div>
                 </div>
-                <div id="login-message"></div>
+                <div id="register-success" class="auth-success"></div>
+                <div id="register-error" class="auth-error"></div>
                 <button
                 class="auth-btn"
                 type="submit">

@@ -1,8 +1,8 @@
-import { showRegister } from "./features/auth/page.js";
+import { showLogin } from "./features/auth/page.js";
 export function router(){
 
     const app = document.getElementById("app");
 
-    showRegister(app);
+    showLogin(app);
 
 }

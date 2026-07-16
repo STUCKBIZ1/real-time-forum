@@ -21,6 +21,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	var data RegisterReq
 	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil{
+		fmt.Println(err)
 		utils.JSONError(w, 500, "Decoder Error")
 		return
 	}

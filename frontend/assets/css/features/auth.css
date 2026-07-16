@@ -18,7 +18,7 @@
 
 .auth-card{
 
-    width:35%;
+    width:25%;
 
     max-width:var(--auth-width);
 
@@ -357,4 +357,26 @@
     }
 
 
+}
+.auth-success,
+.auth-error {
+    display: none;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.auth-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.auth-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
 }
