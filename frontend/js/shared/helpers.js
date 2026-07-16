@@ -1,6 +1,4 @@
 export function getRegisterData(){
-
-
     return {
 
         firstname:
@@ -39,4 +37,22 @@ export function getLoginData(){
         password:
         document.getElementById("login-password").value
     }
-}   
+}
+export function showError(id, message) {
+    const error = document.getElementById(id);
+    error.textContent = message;
+    error.style.display = "block";
+}
+
+export function hideError(id) {
+    document.getElementById(id).style.display = "none";
+}
+export function showSuccess(id, message) {
+    const success = document.getElementById(id);
+    success.textContent = message;
+    success.style.display = "block";
+}
+
+export function hideSuccess(id) {
+    document.getElementById(id).style.display = "none";
+}

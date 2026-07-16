@@ -8,8 +8,6 @@ export async function initPosts() {
     const container =
         document.getElementById("posts-container");
 
-    container.innerHTML = response.posts
-        .map(postTemplate)
-        .join("");
+    container.innerHTML = response.posts.map(postTemplate).join("");
 
 }

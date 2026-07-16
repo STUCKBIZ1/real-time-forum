@@ -1,6 +1,6 @@
 import { showLogin, showRegister } from "./page.js";
 import { registerAPI, loginAPI } from "./api.js";
-import { getLoginData, getRegisterData } from "../../shared/helpers.js";
+import { getLoginData, getRegisterData, showError, showSuccess, hideError, hideSuccess} from "../../shared/helpers.js";
 import { showHome } from "../home/page.js";
     const app = document.getElementById("app");
 function handleAuthNavigation(){
@@ -24,23 +24,47 @@ function handleAuthNavigation(){
 async function handleRegisterSubmit(e){
     e.preventDefault();
     const data = getRegisterData();
+    let response;
     try{
-        const response = await registerAPI(data);
+        response = await registerAPI(data);
         console.log(response);
     }
     catch(error){
         console.error(error);
+    }
+    if(!response.success){
+        showError("register-error",response.message)
+        return
+    }else{
+        showSuccess("register-success", response.message)
+        setTimeout(() => {
+            hideSuccess("register-success")
+            showLogin()
+        }, 3000);
+        return
     }
 }
 async function handleLoginSubmit(e){
     e.preventDefault();
     const data = getLoginData();
+    let response;
     try{
-        const response = await loginAPI(data);
+        response = await loginAPI(data);
         console.log(response);
     }
     catch(error){
         console.error(error);
+    }
+    if (!response.success){
+        showError("register-error", response.message)
+        return
+    }else{
+        showSuccess("register-success", response.message)
+        setTimeout(() => {
+            hideSuccess("register-success")
+            showHome(app)
+        }, 3000);
+        return
     }
 }
 function handleForms(){
