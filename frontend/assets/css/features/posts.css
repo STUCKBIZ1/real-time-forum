@@ -1,6 +1,4 @@
 .post{
-
-
     background:var(--surface);
 
     border-radius:14px;
@@ -18,18 +16,12 @@
     cursor:pointer;
 
     transition:.2s;
-
-
 }
 
 
 
 .post:hover{
-
-
     transform:translateY(-2px);
-
-
 }
 
 

@@ -1,5 +1,10 @@
-export async function getPost(id) {
+    import { request } from "../../shared/fetch";
 
-    return await request(`/posts/${id}`);
+    export async function getPost(id) {
 
-}
+        return await request(`/posts/${id}`);
+
+    }
+    export async function getPosts(){
+        return await request(`/posts?cursor=${cursor}&limit=${limit}`)
+    }
