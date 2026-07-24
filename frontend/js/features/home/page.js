@@ -6,8 +6,8 @@ export async function showHome(app){
 
     await initPosts();
 
-    initChat();
+    // initChat();
 
-    homeEvents();
+    // homeEvents();
 
 }

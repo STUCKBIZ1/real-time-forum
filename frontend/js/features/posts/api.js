@@ -6,5 +6,5 @@
 
     }
     export async function getPosts(){
-        return await request(`/posts?cursor=${cursor}&limit=${limit}`)
+        return await request(`/getPosts?cursor=${cursor}&limit=${limit}`)
     }
