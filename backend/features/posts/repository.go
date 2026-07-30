@@ -11,3 +11,6 @@ func NewRepository(db *sql.DB) *Repository {
 		db: db,
 	}
 }
+func (r *Repository)GetPosts(limit int, cursor int){
+	
+}

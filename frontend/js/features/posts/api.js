@@ -1,5 +1,4 @@
-    import { request } from "../../shared/fetch";
-
+import { request } from "../../shared/fetch.js";
     export async function getPost(id) {
 
         return await request(`/posts/${id}`);

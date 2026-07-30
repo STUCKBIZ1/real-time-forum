@@ -8,3 +8,6 @@ func NewService(repo *Repository) *Service {
 		repo: repo,
 	}
 }
+func (s *Service) GetPosts(limit string, cursor string) ([]Posts, error){
+	
+}

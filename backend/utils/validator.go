@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"net/mail"
 	"strings"
 	"unicode"
@@ -46,4 +47,28 @@ func IsValidPassword(password string) bool {
 		}
 	}
 	return hasUpper && hasLower && hasNumber && hasSymbol
+}
+func IsValidFirstLastName(name string) error {
+	name = strings.TrimSpace(name)
+	runes := []rune(name)
+
+	if len(runes) < 2 || len(runes) > 40 {
+		return errors.New("first or last name must be between 2 and 40 characters")
+	}
+	if !unicode.IsLetter(runes[0]) || !unicode.IsLetter(runes[len(runes)-1]) {
+		return errors.New("invalid first or last name")
+	}
+	for _, r := range runes {
+		if !unicode.IsLetter(r) && r != ' ' && r != '-' && r != '\'' {
+			return errors.New("invalid first or last name")
+		}
+	}
+
+	return nil
+}
+func IsValidAge(age int) error {
+	if age < 13 || age > 120 {
+		return errors.New("age must be between 13 and 120")
+	}
+	return nil
 }

@@ -32,12 +32,20 @@ func (s *Service) Register(data RegisterReq) error {
 	if !utils.IsValidPassword(data.Password) {
 		return errors.New("Password should be strong")
 	}
+	if utils.IsValidFirstLastName(data.Firstname); err != nil{
+		return err
+	}
+	if utils.IsValidFirstLastName(data.Lastname); err != nil{
+		return err
+	}
 	var hash string
 	hash, err = utils.HashPassword(data.Password)
 	if err != nil {
 		return errors.New("Error hashing passoword")
 	}
 	data.Password = hash
+	data.Full_name = utils.GetFullName(data.Firstname, data.Lastname)
+	data.Avatar = utils.GetAvatarRromUser(data.Firstname, data.Lastname)
 	return s.repo.CreatUser(data)
 }
 func (s *Service) Login(data LoginReq) error {

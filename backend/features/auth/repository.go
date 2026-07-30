@@ -15,8 +15,8 @@ func NewRepository(db *sql.DB) *Repository {
 }
 func (r *Repository) CreatUser(data RegisterReq) error {
 	var err error
-	var query = "INSERT INTO users (nickname, email, password, first_name, last_name, age, gender, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-	if _, err = r.db.Exec(query, data.Nickname, data.Email, data.Password, data.Firstname, data.Lastname, data.Age, data.Gender, data.Age, data.Avatar); err != nil {
+	var query = "INSERT INTO users (nickname, email, password, first_name, last_name, full_name, age, gender, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	if _, err = r.db.Exec(query, data.Nickname, data.Email, data.Password, data.Firstname, data.Lastname, data.Full_name, data.Age, data.Gender, data.Age, data.Avatar); err != nil {
 		return err
 	}
 	return nil

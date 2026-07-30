@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL,
     first_name TEXT,
     last_name TEXT,
+    full_name TEXT,
     age INTEGER,
     gender TEXT,
     avatar TEXT DEFAULT NULL,
