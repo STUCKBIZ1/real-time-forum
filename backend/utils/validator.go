@@ -3,6 +3,7 @@ package utils
 import (
 	"errors"
 	"net/mail"
+	"strconv"
 	"strings"
 	"unicode"
 )
@@ -82,13 +83,24 @@ func ValidContent(content string) error {
 	}
 	return nil
 }
-func ValidTitle(title string) error{
+func ValidTitle(title string) error {
 	titleLength := len([]rune(title))
 	if titleLength < 10 {
 		return errors.New("title must be at least 10 characters")
 	}
-	if titleLength > 200{
+	if titleLength > 200 {
 		return errors.New("title must not exceed 200 characters")
 	}
 	return nil
+}
+func ValidId(strID string, text string) (int, error) {
+	var id int
+	if strID != "" {
+		parsed, err := strconv.Atoi(strID)
+		if err != nil || parsed < 1 {
+			return 0, errors.New("inavalid id")
+		}
+		id = parsed
+	}
+	return id, nil
 }

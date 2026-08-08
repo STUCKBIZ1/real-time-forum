@@ -34,14 +34,10 @@ func (s *Service) GetPosts(l string, c string) ([]PostResponse, error) {
 	}
 	return s.repo.GetPosts(limit, cursor)
 }
-func (s *Service) GetPost(i string) (PostResponse, error) {
-	var id int
-	if i != "" {
-		parsed, err := strconv.Atoi(i)
-		if err != nil || parsed < 1 {
-			return PostResponse{}, errors.New("inavalid id")
-		}
-		id = parsed
+func (s *Service) GetPost(strID string) (PostResponse, error) {
+	id, err := utils.ValidId(strID, "Invalid postID")
+	if err != nil{
+		return PostResponse{}, err
 	}
 	return s.repo.GetPost(id)
 }
@@ -54,19 +50,9 @@ func (s *Service) CreatPost(post_req CreatePostRequest) (PostResponse, error) {
 	}
 	return s.repo.CreatPost(post_req)
 }
-func (s *Service) DeletPost(i string) error{
-	var id int
-	if i != ""{
-		parsed, err := strconv.Atoi(i)
-		if err != nil{
-			return err
-		}
-		id = parsed
-	}
-	if id < 1{
-		return errors.New("invalid post_id")
-	}
-	err := s.repo.DeletePost(id)
+func (s *Service) DeletPost(strID string) error{
+	id, err := utils.ValidId(strID, "Invalid postID")
+	err = s.repo.DeletePost(id)
 	if err != nil{
 		return err
 	}

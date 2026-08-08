@@ -9,7 +9,7 @@ type CreatePostRequest struct {
 type PostResponse struct {
 	ID            int              `json:"id"`
 	Avatar        string           `json:"avatar"`
-	Full_name     string           `json:"full_name"`
+	Nickname      string           `json:"nickname"`
 	Title         string           `json:"title"`
 	Content       string           `json:"content"`
 	Category      string           `json:"category"`
@@ -17,16 +17,4 @@ type PostResponse struct {
 	Likes         int              `json:"likes"`
 	Dislikes      int              `json:"dislikes"`
 	CommentsCount int              `json:"commentscount"`
-	Comments      []CommentRespose `json:"comments"`
-}
-type GetPostsReq struct {
-	Limit  string `json:"limit"`
-	Cursor string `json:"cursor"`
-}
-type CommentRespose struct {
-	ID        int    `json:"id"`
-	User_id   int    `json:"user_id"`
-	Post_id   int    `json:"post_id"`
-	Full_name string `json:"full_name"`
-	Content   string `json:"content"`
 }
