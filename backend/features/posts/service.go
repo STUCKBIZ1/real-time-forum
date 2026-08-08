@@ -54,3 +54,21 @@ func (s *Service) CreatPost(post_req CreatePostRequest) (PostResponse, error) {
 	}
 	return s.repo.CreatPost(post_req)
 }
+func (s *Service) DeletPost(i string) error{
+	var id int
+	if i != ""{
+		parsed, err := strconv.Atoi(i)
+		if err != nil{
+			return err
+		}
+		id = parsed
+	}
+	if id < 1{
+		return errors.New("invalid post_id")
+	}
+	err := s.repo.DeletePost(id)
+	if err != nil{
+		return err
+	}
+	return nil
+}

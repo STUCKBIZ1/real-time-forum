@@ -4,12 +4,14 @@ type CreatePostRequest struct {
 	User_id int `json:"user_id"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
+	Category string `json:"category"`
 }	
 type PostResponse struct {
 	ID        int    `json:"id"`
 	Full_name string `json:"full_name"`
 	Title     string `json:"title"`
 	Content   string `json:"content"`
+	Category	string `json:"category"`
 	CreatedAt string `json:"created_at"`
 	Likes     int    `json:"likes"`
 	Dislikes  int    `json:"dislikes"`

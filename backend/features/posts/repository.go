@@ -17,8 +17,8 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 			p.id,
 			u.full_name,
 			p.title,
+			p.category,
 			p.created_at,
-
 			COALESCE(
 				SUM(CASE WHEN pr.reaction = 'like' THEN 1 ELSE 0 END),
 				0
@@ -64,6 +64,7 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 			&post.ID,
 			&post.Full_name,
 			&post.Title,
+			&post.Category,
 			&post.CreatedAt,
 			&post.Likes,
 			&post.Dislikes,
@@ -89,6 +90,7 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 			u.full_name,
 			p.title,
 			p.content,
+			p.category,
 			p.created_at,
 
 			COALESCE(
@@ -127,6 +129,7 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 		&post.Full_name,
 		&post.Title,
 		&post.Content,
+		&post.Category,
 		&post.CreatedAt,
 		&post.Likes,
 		&post.Dislikes,
@@ -141,8 +144,8 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 }	
 func (r *Repository) CreatPost(data CreatePostRequest) (PostResponse, error){
 	var err error
-	insert_query := "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)"
-	result, err := r.db.Exec(insert_query, data.User_id, data.Title, data.Content)
+	insert_query := "INSERT INTO posts (user_id, title, content, category) VALUES (?, ?, ?, ?)"
+	result, err := r.db.Exec(insert_query, data.User_id, data.Title, data.Content, data.Category)
 	if err != nil{
 		return PostResponse{}, err
 	}
@@ -157,4 +160,12 @@ func (r *Repository) CreatPost(data CreatePostRequest) (PostResponse, error){
 		return PostResponse{}, err
 	}
 	return post, nil
+}
+func (r *Repository) DeletePost(id int) error{
+	query := "DELETE FROM posts WHERE id = ?"
+	_, err := r.db.Exec(query, id)
+	if err != nil{
+		return err
+	}
+	return nil
 }

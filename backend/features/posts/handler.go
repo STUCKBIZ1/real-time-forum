@@ -57,3 +57,11 @@ func (h *Handler) CreatPost(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.JSONSuccess(w, 200, "complilty creating post succesfull", post)
 }
+func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request){
+	id := r.URL.Query().Get("post_id")
+	err := h.service.DeletPost(id)
+	if err != nil{
+		utils.JSONError(w, 500, err.Error())
+		return
+	}
+}
