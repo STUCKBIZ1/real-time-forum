@@ -48,3 +48,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	utils.SetSessionCookie(w, session_id)
 	utils.JSONSuccess(w, 201, "User logged successfly", data)
 }
+func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
+	
+}

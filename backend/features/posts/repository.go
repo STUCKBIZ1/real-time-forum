@@ -15,6 +15,7 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 	query := `
 		SELECT
 			p.id,
+			u.avatar,
 			u.full_name,
 			p.title,
 			p.category,
@@ -62,6 +63,7 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 
 		err := rows.Scan(
 			&post.ID,
+			&post.Avatar,
 			&post.Full_name,
 			&post.Title,
 			&post.Category,
@@ -87,6 +89,7 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 	query := `
 		SELECT
 			p.id,
+			u.avatar,
 			u.full_name,
 			p.title,
 			p.content,
@@ -126,6 +129,7 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 
 	err := r.db.QueryRow(query, id).Scan(
 		&post.ID,
+		&post.Avatar,
 		&post.Full_name,
 		&post.Title,
 		&post.Content,
