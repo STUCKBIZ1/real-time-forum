@@ -46,6 +46,11 @@ func (h *Handler) CreatPost(w http.ResponseWriter, r *http.Request) {
 		utils.JSONError(w, 500, err.Error())
 		return
 	}
+	req.User_id, err = utils.GetUserFromRequest(r)
+	if err != nil{
+		utils.JSONError(w, 500, err.Error())
+		return
+	}
 	post, err = h.service.CreatPost(req)
 	if err != nil {
 		utils.JSONError(w, 500, err.Error())

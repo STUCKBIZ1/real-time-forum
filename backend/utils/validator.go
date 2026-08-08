@@ -72,3 +72,23 @@ func IsValidAge(age int) error {
 	}
 	return nil
 }
+func ValidContent(content string) error {
+	contentLength := len([]rune(content))
+	if contentLength < 20 {
+		return errors.New("content must be at least 20 characters")
+	}
+	if contentLength > 500 {
+		return errors.New("content must not exceed 500 characters")
+	}
+	return nil
+}
+func ValidTitle(title string) error{
+	titleLength := len([]rune(title))
+	if titleLength < 10 {
+		return errors.New("title must be at least 10 characters")
+	}
+	if titleLength > 200{
+		return errors.New("title must not exceed 200 characters")
+	}
+	return nil
+}

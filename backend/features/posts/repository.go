@@ -139,3 +139,22 @@ func (r *Repository) GetPost(id int) (PostResponse, error) {
 
 	return post, nil
 }	
+func (r *Repository) CreatPost(data CreatePostRequest) (PostResponse, error){
+	var err error
+	insert_query := "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)"
+	result, err := r.db.Exec(insert_query, data.User_id, data.Title, data.Content)
+	if err != nil{
+		return PostResponse{}, err
+	}
+	var post PostResponse
+	var post_id int64
+	post_id, err = result.LastInsertId()
+	if err != nil{
+		return PostResponse{}, err
+	}
+	post, err = r.GetPost(int(post_id))
+	if err != nil{
+		return PostResponse{}, err
+	}
+	return post, nil
+}
