@@ -15,7 +15,7 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 	query := `
 		SELECT
 			p.id,
-			u.firstname || ' ' || u.lastname AS full_name,
+			u.full_name,
 			p.title,
 			p.created_at,
 
@@ -44,13 +44,7 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 			ON pr.post_id = p.id
 
 		GROUP BY
-			p.id,
-			u.firstname,
-			u.lastname,
-			p.title,
-			p.content,
-			p.created_at
-
+			p.id
 		ORDER BY p.id DESC
 		LIMIT ? OFFSET ?
 	`
@@ -82,9 +76,66 @@ func (r *Repository) GetPosts(limit, offset int) ([]PostResponse, error) {
 		posts = append(posts, post)
 	}
 
-	if  err != nil {
+	if err != nil {
 		return nil, err
 	}
 
 	return posts, nil
 }
+func (r *Repository) GetPost(id int) (PostResponse, error) {
+	query := `
+		SELECT
+			p.id,
+			u.full_name,
+			p.title,
+			p.content,
+			p.created_at,
+
+			COALESCE(
+				(SELECT COUNT(*)
+				 FROM post_reactions pr
+				 WHERE pr.post_id = p.id
+				   AND pr.reaction = 'like'),
+				0
+			) AS likes,
+
+			COALESCE(
+				(SELECT COUNT(*)
+				 FROM post_reactions pr
+				 WHERE pr.post_id = p.id
+				   AND pr.reaction = 'dislike'),
+				0
+			) AS dislikes,
+
+			COALESCE(
+				(SELECT COUNT(*)
+				 FROM comments c
+				 WHERE c.post_id = p.id),
+				0
+			) AS comments_count
+
+		FROM posts p
+		JOIN users u
+			ON u.id = p.user_id
+		WHERE p.id = ?
+	`
+
+	var post PostResponse
+
+	err := r.db.QueryRow(query, id).Scan(
+		&post.ID,
+		&post.Full_name,
+		&post.Title,
+		&post.Content,
+		&post.CreatedAt,
+		&post.Likes,
+		&post.Dislikes,
+		&post.CommentsCount,
+	)
+
+	if err != nil {
+		return PostResponse{}, err
+	}
+
+	return post, nil
+}	

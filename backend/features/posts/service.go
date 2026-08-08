@@ -33,3 +33,18 @@ func (s *Service) GetPosts(l string, c string) ([]PostResponse, error) {
 	}
 	return s.repo.GetPosts(limit, cursor)
 }
+func (s *Service) GetPost(i string) (PostResponse, error){
+	var id int
+	if i != ""{
+		parsed, err := strconv.Atoi(i)
+		if err != nil || parsed < 1{
+			return PostResponse{}, errors.New("inavalid id")
+		}
+		id = parsed
+	}
+	return s.repo.GetPost(id)
+}
+func (s *Service) CreatPost(post_req CreatePostRequest) (PostResponse, error){
+	var post PostResponse
+	return post, nil
+}
