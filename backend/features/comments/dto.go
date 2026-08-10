@@ -11,3 +11,9 @@ type CommentRespose struct {
 	Dislikes  int    `json:"dislikes"`
 	CreatedAt string `json:"created_at"`
 }
+type CommentReq struct{
+	StrPost_id string `json:"post_id"`
+	PostID int `json:"postid"`
+	User_id int `json:"user_id"`
+	Content string `json:"content"`
+}
